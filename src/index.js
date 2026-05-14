@@ -1,4 +1,6 @@
 export * from "./content/blog.js";
+export * from "./content/service-pages.js";
+export * from "./seo/og-image.js";
 export * from "./seo/share.js";
 export * from "./seo/structured-data.js";
 export * from "./ui/navbar.js";

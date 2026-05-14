@@ -7,6 +7,8 @@ El foco de esta primera versión es lo que mejor encaja con un producto transver
 - SEO metadata y social sharing
 - JSON-LD para `WebSite`, `Organization`, `BreadcrumbList`, `BlogPosting` y `FAQPage`
 - helpers de blog para index y posts
+- helpers SEO para páginas de servicios
+- plantilla editable de OG image para landings de negocio
 - navbar base para empresas y servicios
 - utilidades pequeñas de texto y arrays
 
@@ -32,7 +34,9 @@ Eso mantiene `web-core` más vendible y más limpio para templates generales.
 src/
   content/
     blog.js
+    service-pages.js
   seo/
+    og-image.js
     share.js
     structured-data.js
   ui/
@@ -50,6 +54,7 @@ styles/
 import {
   createBlogPostSeoBundle,
   createFaqSchema,
+  createServiceOgImageHtml,
   mountNavbar,
   renderJsonLdScripts
 } from "web-core";
@@ -74,6 +79,13 @@ const faqSchema = createFaqSchema([
 
 const jsonLd = renderJsonLdScripts([...seo.schemas, faqSchema]);
 
+const ogImageHtml = createServiceOgImageHtml({
+  brand: "Example Studio",
+  title: "The website your business deserves.",
+  subtitle: "Fast, clear, professional sites for local businesses.",
+  priceBadge: "From EUR 500"
+});
+
 mountNavbar("#site-header", {
   brandName: "Example Studio",
   brandHref: "/",
@@ -96,6 +108,7 @@ mountNavbar("#site-header", {
 - `buildShareableUrl`
 - `buildSharePayload`
 - `createOrganizationSchema`
+- `createProfessionalServiceSchema`
 - `createWebSiteSchema`
 - `createBreadcrumbSchema`
 - `createBlogPostingSchema`
@@ -105,6 +118,9 @@ mountNavbar("#site-header", {
 - `createBlogIndexMetadata`
 - `createBlogPostMetadata`
 - `createBlogPostSeoBundle`
+- `createServicePageMetadata`
+- `createServicePageSeoBundle`
+- `createServiceOgImageHtml`
 - `getDefaultNavbarLinks`
 - `createNavbarMarkup`
 - `mountNavbar`

@@ -46,6 +46,55 @@ function createOrganizationSchema(config = {}) {
   };
 }
 
+function createOfferSchema(offer, baseUrl = "") {
+  if (!offer) {
+    return undefined;
+  }
+
+  return {
+    "@type": "Offer",
+    name: normalizeText(offer.name),
+    price: offer.price !== undefined && offer.price !== null ? String(offer.price) : undefined,
+    priceCurrency: normalizeText(offer.priceCurrency),
+    description: normalizeText(offer.description),
+    url: normalizeUrl(offer.url, baseUrl) || undefined
+  };
+}
+
+function createContactPointSchema(contactPoint = {}) {
+  if (!contactPoint) {
+    return undefined;
+  }
+
+  return {
+    "@type": "ContactPoint",
+    contactType: normalizeText(contactPoint.contactType || "sales"),
+    email: normalizeText(contactPoint.email),
+    telephone: normalizeText(contactPoint.telephone),
+    availableLanguage: toArray(contactPoint.availableLanguage)
+      .map((item) => normalizeText(item))
+      .filter(Boolean)
+  };
+}
+
+function createAreaServed(value) {
+  if (!value) {
+    return undefined;
+  }
+
+  if (typeof value === "string") {
+    return {
+      "@type": "Place",
+      name: normalizeText(value)
+    };
+  }
+
+  return {
+    "@type": normalizeText(value.type || "Place"),
+    name: normalizeText(value.name)
+  };
+}
+
 function createWebSiteSchema(config = {}) {
   return {
     "@context": "https://schema.org",
@@ -55,6 +104,26 @@ function createWebSiteSchema(config = {}) {
     description: normalizeText(config.description),
     inLanguage: normalizeText(config.language),
     publisher: config.publisher || undefined
+  };
+}
+
+function createProfessionalServiceSchema(config = {}) {
+  const baseUrl = normalizeText(config.url || config.baseUrl);
+  const offer = createOfferSchema(config.offers, baseUrl);
+  const contactPoint = createContactPointSchema(config.contactPoint);
+  const image = createImageObject(config.image, baseUrl);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": normalizeText(config.type || "ProfessionalService"),
+    name: normalizeText(config.name),
+    url: normalizeUrl(config.url, baseUrl),
+    description: normalizeText(config.description),
+    image,
+    serviceType: normalizeText(config.serviceType),
+    areaServed: toArray(config.areaServed).map(createAreaServed).filter(Boolean),
+    offers: offer,
+    contactPoint
   };
 }
 
@@ -172,6 +241,7 @@ export {
   createBlogPostingSchema,
   createBreadcrumbSchema,
   createFaqSchema,
+  createProfessionalServiceSchema,
   createOrganizationSchema,
   createWebSiteSchema,
   renderJsonLdScript,
