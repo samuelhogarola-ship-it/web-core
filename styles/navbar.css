@@ -1,0 +1,121 @@
+.web-core-navbar-shell {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid #e5e7eb;
+  backdrop-filter: blur(14px);
+}
+
+.web-core-navbar {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.web-core-navbar-brand {
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.web-core-navbar-toggle {
+  display: none;
+  margin-left: auto;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.web-core-navbar-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 1;
+}
+
+.web-core-navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex: 1;
+}
+
+.web-core-navbar-link,
+.web-core-navbar-cta {
+  text-decoration: none;
+  transition: color 0.16s ease, background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.web-core-navbar-link {
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.web-core-navbar-link:hover,
+.web-core-navbar-link.is-active {
+  color: #111827;
+}
+
+.web-core-navbar-cta {
+  color: #ffffff;
+  background: #111827;
+  border: 1px solid #111827;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.web-core-navbar-cta:hover {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
+@media (max-width: 860px) {
+  .web-core-navbar {
+    flex-wrap: wrap;
+  }
+
+  .web-core-navbar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .web-core-navbar-panel {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 10px;
+  }
+
+  .web-core-navbar-panel.is-open {
+    display: flex;
+  }
+
+  .web-core-navbar-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .web-core-navbar-cta {
+    text-align: center;
+  }
+}

@@ -9,6 +9,8 @@
     "./content/blog": "./src/content/blog.js",
     "./seo/share": "./src/seo/share.js",
     "./seo/structured-data": "./src/seo/structured-data.js",
+    "./styles/navbar.css": "./styles/navbar.css",
+    "./ui/navbar": "./src/ui/navbar.js",
     "./utils/array": "./src/utils/array.js",
     "./utils/text": "./src/utils/text.js"
   },

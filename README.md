@@ -7,6 +7,7 @@ El foco de esta primera versión es lo que mejor encaja con un producto transver
 - SEO metadata y social sharing
 - JSON-LD para `WebSite`, `Organization`, `BreadcrumbList`, `BlogPosting` y `FAQPage`
 - helpers de blog para index y posts
+- navbar base para empresas y servicios
 - utilidades pequeñas de texto y arrays
 
 ## Qué migré de `core`
@@ -19,7 +20,6 @@ También extraje helpers base inspirados en utilidades compartidas del repo orig
 
 Estas piezas no entraron porque hoy están demasiado ligadas a apps concretas, branding o flujos educativos:
 
-- navbar compartida actual
 - configs de dashboard y errores persistidos
 - práctica, flashcards, quiz review y mistake review
 - naming legacy de `window.VokabelLabCore` y `window.LabWorldCore`
@@ -35,9 +35,13 @@ src/
   seo/
     share.js
     structured-data.js
+  ui/
+    navbar.js
   utils/
     array.js
     text.js
+styles/
+  navbar.css
 ```
 
 ## Uso rápido
@@ -46,6 +50,7 @@ src/
 import {
   createBlogPostSeoBundle,
   createFaqSchema,
+  mountNavbar,
   renderJsonLdScripts
 } from "web-core";
 
@@ -68,6 +73,19 @@ const faqSchema = createFaqSchema([
 ]);
 
 const jsonLd = renderJsonLdScripts([...seo.schemas, faqSchema]);
+
+mountNavbar("#site-header", {
+  brandName: "Example Studio",
+  brandHref: "/",
+  currentPath: "/blog/",
+  links: [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services/" },
+    { label: "About", href: "/about/" },
+    { label: "Blog", href: "/blog/" },
+    { label: "Contact", href: "/contact/" }
+  ]
+});
 ```
 
 ## API principal
@@ -87,6 +105,9 @@ const jsonLd = renderJsonLdScripts([...seo.schemas, faqSchema]);
 - `createBlogIndexMetadata`
 - `createBlogPostMetadata`
 - `createBlogPostSeoBundle`
+- `getDefaultNavbarLinks`
+- `createNavbarMarkup`
+- `mountNavbar`
 - `slugify`
 - `createExcerpt`
 - `estimateReadingTime`
