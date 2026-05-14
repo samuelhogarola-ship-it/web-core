@@ -1,0 +1,25 @@
+{
+  "name": "web-core",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reusable SEO, content, and utility helpers for commercial web templates.",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./content/blog": "./src/content/blog.js",
+    "./content/service-pages": "./src/content/service-pages.js",
+    "./seo/og-image": "./src/seo/og-image.js",
+    "./seo/share": "./src/seo/share.js",
+    "./seo/structured-data": "./src/seo/structured-data.js",
+    "./styles/navbar.css": "./styles/navbar.css",
+    "./ui/navbar": "./src/ui/navbar.js",
+    "./utils/array": "./src/utils/array.js",
+    "./utils/text": "./src/utils/text.js"
+  },
+  "scripts": {
+    "check": "node --input-type=module -e \"import('./src/index.js').then(() => console.log('web-core ok'))\""
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
